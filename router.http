@@ -1,0 +1,36 @@
+
+POST http://localhost:8080/empresas
+Content-Type: application/json
+
+{
+  "nome": "ES",
+  "descricao": "dsdsddfsdfds",
+  "cnpj": "2324234234",
+  "email": "sadsadsa@gmail.com"
+}
+
+###
+
+GET  http://localhost:8080/empresas
+
+###
+
+GET  http://localhost:8080/empresas/1
+
+###
+
+DELETE  http://localhost:8080/empresas/1
+
+
+###
+
+
+PUT  http://localhost:8080/empresas/1
+Content-Type: application/json
+
+{
+  "nome": "ESSSADS",
+  "descricao": "dsdsddfsDSADSADSADSAdfds",
+  "cnpj": "232423232434234",
+  "email": "saDSFDDSFSDFDSdsadsa@gmail.com"
+}
