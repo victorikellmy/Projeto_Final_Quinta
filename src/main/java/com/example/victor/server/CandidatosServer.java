@@ -1,20 +1,17 @@
-package com.example.victor.controller;
+package com.example.victor.server;
 
 import com.example.victor.model.entity.Candidato;
 import com.example.victor.model.repository.CandidatoRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
-@Controller
-@RequestMapping("candidatos")
-public class CandidatosController {
+@Service
+public class CandidatosServer {
     @Autowired
     CandidatoRepository candidatoRepository;
 

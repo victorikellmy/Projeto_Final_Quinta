@@ -1,24 +1,16 @@
-package com.example.victor.controller;
+package com.example.victor.server;
 
-import com.example.victor.model.entity.Candidato;
-import com.example.victor.model.entity.Endereco;
 import com.example.victor.model.entity.Experiencia;
-import com.example.victor.model.repository.CandidatoRepository;
 import com.example.victor.model.repository.ExperienciaRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
-@Controller
-@RequestMapping("experiencias")
-public class ExperienciaController {
+@Service
+public class ExperienciaServer {
     @Autowired
     ExperienciaRepository experienciaRepository;
 

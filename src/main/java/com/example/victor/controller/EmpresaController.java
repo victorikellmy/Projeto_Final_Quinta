@@ -1,9 +1,11 @@
 package com.example.victor.controller;
-
 import java.util.List;
 import java.util.Optional;
 
+import com.example.victor.model.entity.Empresa;
+import com.example.victor.server.EmpresaServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,52 +15,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.victor.model.entity.Empresa;
-import com.example.victor.model.repository.EmpresaRepository;
-
-import jakarta.transaction.Transactional;
 
 
-@Transactional
 @RestController
 @RequestMapping("/empresas")
 public class EmpresaController {
+
     @Autowired
-    EmpresaRepository empresaRepository;
+    private EmpresaServer empresaServer;
 
- 
+    @PostMapping
+    public ResponseEntity<Empresa> salvarEmpresa(@RequestBody Empresa empresa) {
+        Empresa novaEmpresa = empresaServer.save(empresa);
+        return ResponseEntity.ok().body(novaEmpresa);
+    }
+
     @GetMapping
-    public List<Empresa> empresas(){
-        return  empresaRepository.findAll();
-
+    public List<Empresa> obterTodasEmpresas() {
+        return empresaServer.empresas();
     }
 
     @GetMapping("/{id}")
-    public Optional<Empresa> empresa(@PathVariable Long id){
-        return empresaRepository.findById(id);
+    public ResponseEntity<Empresa> obterEmpresaPorId(@PathVariable Long id) {
+        Optional<Empresa> empresa = empresaServer.empresa(id);
+        return empresa.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public Empresa save(@RequestBody Empresa empresa){
-        return empresaRepository.save(empresa);
+    @PutMapping("/{id}")
+    public ResponseEntity<Empresa> editarEmpresa(@PathVariable Long id, @RequestBody Empresa empresa) {
+        Optional<Empresa> empresaAtualizada = empresaServer.editar(empresa, id);
+        return empresaAtualizada.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void empresaDeletar(@PathVariable Long id){
-         empresaRepository.deleteById(id);
-    }
-
-    
-    @PutMapping("/{id}")
-    public Optional<Empresa> editar(@RequestBody Empresa empresa, @PathVariable Long id){
-        return empresaRepository.findById(id).map(e -> {
-            e.setNome(empresa.getNome());
-            e.setDescricao(empresa.getDescricao());
-            e.setCnpj(empresa.getCnpj());
-            e.setEmail(empresa.getEmail());
-            var u = empresaRepository.save(e);
-            return u;
-        });
-        
+    public ResponseEntity<Void> deletarEmpresa(@PathVariable Long id) {
+        empresaServer.empresaDeletar(id);
+        return ResponseEntity.noContent().build();
     }
 }
+
