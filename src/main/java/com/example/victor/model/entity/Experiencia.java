@@ -10,13 +10,13 @@ public class Experiencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
-    String nomeEmpresa;
-    String cargo;
-    LocalDateTime periodoInicio;
-    LocalDateTime periodoFim;
+    private String nomeEmpresa;
+    private String cargo;
+    private LocalDateTime periodoInicio;
+    private LocalDateTime periodoFim;
 
-    String formaContratacao;
-    String tarefaExecutada;
+    private String formaContratacao;
+    private String tarefaExecutada;
 
     @ManyToOne
     private Candidato candidato;

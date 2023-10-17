@@ -9,11 +9,11 @@ import jakarta.persistence.*;
 public class Vaga implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String cargo;
-    String descricao;
-    String contracao;
-    String remuneracao;
+    private int id;
+    private String cargo;
+    private String descricao;
+    private String contracao;
+    private String remuneracao;
 
     @OneToMany(mappedBy = "vaga")
     private List<Candidato> candidatos;

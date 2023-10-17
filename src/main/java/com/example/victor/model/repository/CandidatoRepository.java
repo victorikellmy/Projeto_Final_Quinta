@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CandidatoRepository extends JpaRepository<Candidato, Long> {
+
 }

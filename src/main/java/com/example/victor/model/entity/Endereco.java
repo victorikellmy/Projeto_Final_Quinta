@@ -8,12 +8,12 @@ import jakarta.persistence.*;
 public class Endereco implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String rua;
-    String cidade;
-    String estado;
-    String tipo;
-    String uf;
+    private int id;
+    private String rua;
+    private String cidade;
+    private String estado;
+    private String tipo;
+    private String uf;
 
     @OneToOne(mappedBy="endereco")
     private Candidato candidato;

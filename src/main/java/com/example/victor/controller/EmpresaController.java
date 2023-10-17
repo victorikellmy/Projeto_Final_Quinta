@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.example.victor.model.entity.Empresa;
 import com.example.victor.server.EmpresaServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class EmpresaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Empresa> obterEmpresaPorId(@PathVariable Long id) {
-        Optional<Empresa> empresa = empresaServer.empresa(id);
+        var empresa = empresaServer.empresa(id);
         return empresa.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
@@ -51,6 +52,16 @@ public class EmpresaController {
     public ResponseEntity<Void> deletarEmpresa(@PathVariable Long id) {
         empresaServer.empresaDeletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/buscarnome/{nome}")
+    public  List<Empresa> obeterEmpresaPornome(@PathVariable String nome){
+        return empresaServer.bucarPorNome(nome);
+    }
+
+    @GetMapping("/buscarestado/{estado}")
+    public  List<Empresa> obterEmpresaPorestado(@PathVariable String estado){
+        return empresaServer.buscarPorEstado(estado);
     }
 }
 

@@ -49,9 +49,16 @@ public class EmpresaServer {
             e.setDescricao(empresa.getDescricao());
             e.setCnpj(empresa.getCnpj());
             e.setEmail(empresa.getEmail());
-            var u = empresaRepository.save(e);
-            return u;
+            return empresaRepository.save(e);
         });
         
+    }
+
+    public List<Empresa>bucarPorNome(@PathVariable String nome){
+        return  empresaRepository.findByNome(nome);
+    }
+
+    public List<Empresa>buscarPorEstado(@PathVariable String estado){
+        return empresaRepository.findByEstado(estado);
     }
 }

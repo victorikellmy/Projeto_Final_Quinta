@@ -2,23 +2,18 @@ package com.example.victor.model.entity;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String nome;
-    String descricao;
-    String cnpj;
-    String email;
-    @OneToOne
+    private Long id;
+    private String nome;
+    private String descricao;
+    private String cnpj;
+    private String email;
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
     @ManyToOne
     private Vaga vaga;

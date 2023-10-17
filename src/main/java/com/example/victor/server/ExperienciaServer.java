@@ -14,27 +14,27 @@ public class ExperienciaServer {
     @Autowired
     ExperienciaRepository experienciaRepository;
 
-    @GetMapping
+
     public List<Experiencia> experiencias(){
         return experienciaRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+
     public Optional<Experiencia> experiencia(@PathVariable Long id){
         return  experienciaRepository.findById(id);
     }
 
-    @PostMapping
+
     public Experiencia save(@RequestBody Experiencia experiencia){
         return experienciaRepository.save(experiencia);
     }
 
-    @DeleteMapping("/{id}")
+
     public void experienciaDelete(@PathVariable Long id){
         experienciaRepository.deleteById(id);
     }
 
-    @PutMapping("/{id}")
+
     public Optional<Experiencia> editar(@RequestBody Experiencia experiencia, @PathVariable Long id){
         return experienciaRepository.findById(id).map(e -> {
             e.setNomeEmpresa(experiencia.getNomeEmpresa());

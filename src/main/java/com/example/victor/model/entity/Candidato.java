@@ -10,9 +10,9 @@ public class Candidato implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
-    String nome;
-    String email;
-    String telefone;
+    private String nome;
+    private String email;
+    private String telefone;
 
     @OneToOne
     private Endereco endereco;

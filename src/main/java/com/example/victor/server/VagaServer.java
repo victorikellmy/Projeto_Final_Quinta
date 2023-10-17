@@ -18,27 +18,27 @@ public class VagaServer {
     @Autowired
     VagaRepository vagaRepository;
 
-    @GetMapping
+
     public List<Vaga> vagas(){
         return vagaRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+
     public Optional<Vaga> vaga(@PathVariable Long id){
         return  vagaRepository.findById(id);
     }
 
-    @PostMapping
+
     public Vaga save(@RequestBody Vaga vaga){
         return vagaRepository.save(vaga);
     }
 
-    @DeleteMapping("/{id}")
+
     public void vagaDelete(@PathVariable Long id){
         vagaRepository.deleteById(id);
     }
 
-    @PutMapping("/{id}")
+
     public Optional<Vaga> editar(@RequestBody Vaga vaga, @PathVariable Long id){
         return vagaRepository.findById(id).map(v -> {
             v.setCandidatos(vaga.getCandidatos());
@@ -47,8 +47,7 @@ public class VagaServer {
             v.setDescricao(vaga.getDescricao());
             v.setEmpresas(vaga.getEmpresas());
             v.setRemuneracao(vaga.getRemuneracao());
-            var u = vagaRepository.save(v);
-            return u;
+            return vagaRepository.save(v);
         });
 
     }
